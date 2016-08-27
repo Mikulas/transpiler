@@ -6,7 +6,7 @@ use Mikulas\Transpiler\Transpiler;
 use PhpParser\ParserFactory;
 
 
-class Php71Features extends \PHPUnit_Framework_TestCase
+class Php71FeatureTest extends \PHPUnit_Framework_TestCase
 {
 
 	public function testVoidReturnType()
