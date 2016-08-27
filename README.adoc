@@ -21,3 +21,6 @@ function foo(): void {}
 # -->
 function foo() {}
 ```
+
+__Limitations:__ `ReflectionFunctionAbstract::getReturnType()` and `hasReturnType()` will return `NULL` and `FALSE` respectively instead of original values.
+
