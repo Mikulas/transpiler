@@ -2,7 +2,7 @@
 
 function alpha() {}
 
-class Foo {
+abstract class Foo {
 
 	public function beta() {}
 
