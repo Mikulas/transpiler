@@ -1,0 +1,19 @@
+machine:
+  timezone: UTC
+  php:
+    version: 7.0.4
+
+dependencies:
+  cache_directories:
+    - ~/.composer/cache
+    - vendor
+  override:
+    - composer self-update
+    - composer global require "hirak/prestissimo:^0.3"
+    - composer install
+
+test:
+  pre:
+    - composer dump-autoload --classmap-authoritative
+  override:
+    - vendor/bin/phpunit --bootstrap vendor/autoload.php --coverage-html "$CIRCLE_ARTIFACTS" --whitelist src tests/cases
