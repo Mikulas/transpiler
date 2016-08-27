@@ -24,3 +24,20 @@ function foo() {}
 
 __Limitations:__ `ReflectionFunctionAbstract::getReturnType()` and `hasReturnType()` will return `NULL` and `FALSE` respectively instead of original values.
 
+- remove class constant visibilities
+
+```
+class Foo {
+	public const A = 'a';
+	protected const B = 'b';
+	private const C = 'c';
+}
+# -->
+class Foo {
+	const A = 'a';
+	const B = 'b';
+	const C = 'c';
+}
+```
+
+__Limitations:__ none

@@ -15,6 +15,12 @@ class Php71FeatureTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testClassConstantVisibility()
+	{
+		$this->assertTranspiledAs('classConstantVisibility');
+	}
+
+
 	private function assertTranspiledAs(string $fixture)
 	{
 		$parser = (new ParserFactory)->create(ParserFactory::ONLY_PHP7);

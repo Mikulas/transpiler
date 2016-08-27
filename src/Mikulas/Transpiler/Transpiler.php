@@ -4,6 +4,7 @@ namespace Mikulas\Transpiler;
 
 use Mikulas\Transpiler\Modifiers\Chain;
 use Mikulas\Transpiler\Modifiers\Modifier;
+use Mikulas\Transpiler\Modifiers\RemoveClassConstantVisibility;
 use Mikulas\Transpiler\Modifiers\RemoveVoidReturnType;
 use PhpParser\Node;
 
@@ -20,6 +21,7 @@ class Transpiler
 		// TODO factory?
 		$this->modifier = new Chain([
 			new RemoveVoidReturnType(),
+			new RemoveClassConstantVisibility(),
 		]);
 	}
 
