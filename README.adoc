@@ -1,0 +1,23 @@
+= Transpiler
+
+PHP source code transformations.
+
+== What Is It Good For?
+
+By transpiling code to older runtime versions you gain
+many benefits of PHP 7.1 such as void return types and
+optionals (which are mostly useful for static analysis),
+but you are not forced to update production to unstable
+bleeding-edge versions.
+
+== Implemented AST modifiers:
+
+=== PHP 7.1 -> 7.0
+
+- remove void return types
+
+```
+function foo(): void {}
+# -->
+function foo() {}
+```
