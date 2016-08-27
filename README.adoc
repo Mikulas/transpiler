@@ -14,7 +14,7 @@ bleeding-edge versions.
 
 === PHP 7.1 -> 7.0
 
-- remove void return types
+==== remove void return types
 
 ```
 function foo(): void {}
@@ -24,7 +24,7 @@ function foo() {}
 
 __Limitations:__ `ReflectionFunctionAbstract::getReturnType()` and `hasReturnType()` will return `NULL` and `FALSE` respectively instead of original values.
 
-- remove class constant visibilities
+==== remove class constant visibilities
 
 ```
 class Foo {
