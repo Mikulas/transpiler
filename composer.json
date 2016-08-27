@@ -1,0 +1,21 @@
+{
+    "name": "mikulas/transpile",
+    "type": "project",
+    "require": {
+        "nikic/php-parser": "dev-master#46495abb as 3.0.0alpha"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5"
+    },
+    "autoload": {
+        "psr-4": {"Mikulas\\Transpiler\\": "src/"}
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mikulas Dite",
+            "email": "mikulas@dite.pro"
+        }
+    ],
+    "minimum-stability": "stable"
+}
