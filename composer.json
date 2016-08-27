@@ -2,6 +2,7 @@
     "name": "mikulas/transpile",
     "type": "project",
     "require": {
+        "php": "^7.0",
         "nikic/php-parser": "dev-master#46495abb as 3.0.0alpha"
     },
     "require-dev": {
