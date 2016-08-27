@@ -1,0 +1,23 @@
+<?php declare(strict_types=1);
+
+function alpha() {}
+
+class Foo {
+
+	public function beta() {}
+
+	abstract protected function gamma();
+
+}
+
+trait Bar {
+
+	function delta() {}
+
+}
+
+interface Quz {
+
+	function epsilon();
+
+}

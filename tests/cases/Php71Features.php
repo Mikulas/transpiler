@@ -9,6 +9,12 @@ use PhpParser\ParserFactory;
 class Php71Features extends \PHPUnit_Framework_TestCase
 {
 
+	public function testVoidReturnType()
+	{
+		$this->assertTranspiledAs('voidReturnType');
+	}
+
+
 	private function assertTranspiledAs(string $fixture)
 	{
 		$parser = (new ParserFactory)->create(ParserFactory::ONLY_PHP7);

@@ -19,6 +19,7 @@ class Transpiler
 	{
 		// TODO factory?
 		$this->modifier = new Chain([
+			new RemoveVoidReturnType(),
 		]);
 	}
 
