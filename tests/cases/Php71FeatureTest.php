@@ -11,21 +11,22 @@ use PhpParser\PrettyPrinter;
 class Php71FeatureTest extends \PHPUnit_Framework_TestCase
 {
 
-	public function testVoidReturnType()
+	public function getFeatureList(): array
 	{
-		$this->assertTranspiledAs('voidReturnType');
+		return [
+			['voidReturnType'],
+			['classConstantVisibility'],
+			['namedSquareBracketExpansion'],
+		];
 	}
 
 
-	public function testClassConstantVisibility()
+	/**
+	 * @dataProvider getFeatureList
+	 */
+	public function testFeature(string $feature)
 	{
-		$this->assertTranspiledAs('classConstantVisibility');
-	}
-
-
-	public function testNamedSquareBracketExpansion()
-	{
-		$this->assertTranspiledAs('namedSquareBracketExpansion');
+		$this->assertTranspiledAs($feature);
 	}
 
 
