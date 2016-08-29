@@ -3,21 +3,32 @@
 namespace Mikulas\Transpiler\Modifiers;
 
 use PhpParser\Node;
-use PhpParser\NodeVisitorAbstract;
 
 
-class RemoveVoidReturnType extends NodeVisitorAbstract
+class RemoveVoidReturnType extends NodeFilteringVisitor
 {
 
-	public function enterNode(Node $node)
+	/**
+	 * When TRUE, transpile is called
+	 *
+	 * @param Node $node
+	 * @return bool
+	 */
+	public function filter(Node $node): bool
 	{
-		if ($node instanceof Node\Stmt\Function_
-		 || $node instanceof Node\Stmt\ClassMethod
-		 || $node instanceof Node\Expr\Closure)
-		{
-			$node->returnType = NULL;
-			return $node;
-		}
+		return $node instanceof Node\Stmt\Function_
+			|| $node instanceof Node\Stmt\ClassMethod
+			|| $node instanceof Node\Expr\Closure;
+	}
+
+
+	/**
+	 * @param Node\Stmt\Function_|Node\Stmt\ClassMethod|Node\Expr\Closure $node
+	 */
+	public function transpile(Node $node): Node
+	{
+		$node->returnType = NULL;
+		return $node;
 	}
 
 }

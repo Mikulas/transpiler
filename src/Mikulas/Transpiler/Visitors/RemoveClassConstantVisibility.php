@@ -3,19 +3,22 @@
 namespace Mikulas\Transpiler\Modifiers;
 
 use PhpParser\Node;
-use PhpParser\NodeVisitorAbstract;
 
 
-class RemoveClassConstantVisibility extends NodeVisitorAbstract
+class RemoveClassConstantVisibility extends NodeFilteringVisitor
 {
 
-	public function enterNode(Node $node)
+	public function filter(Node $node): bool
 	{
-		if (!$node instanceof Node\Stmt\ClassConst) {
-			return NULL;
-		}
+		return $node instanceof Node\Stmt\ClassConst;
+	}
 
-		// remove visibility bits
+
+	/**
+	 * @param Node\Stmt\ClassConst $node
+	 */
+	public function transpile(Node $node): Node
+	{
 		$node->flags &= ~Node\Stmt\Class_::VISIBILITY_MODIFER_MASK;
 		return $node;
 	}
