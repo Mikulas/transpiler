@@ -1,0 +1,8 @@
+<?php declare(strict_types=1);
+
+${'~transpiler-1'} = ['a' => 1, 'b' => 2, 'c' => 3];
+$a = ${'~transpiler-1'}['a'];
+$c = ${'~transpiler-1'}['c'];
+
+${'~transpiler-2'} = ['a' => 10];
+$a = ${'~transpiler-2'}['a'];

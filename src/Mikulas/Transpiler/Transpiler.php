@@ -6,6 +6,7 @@ use Mikulas\Transpiler\Modifiers\Chain;
 use Mikulas\Transpiler\Modifiers\Modifier;
 use Mikulas\Transpiler\Modifiers\RemoveClassConstantVisibility;
 use Mikulas\Transpiler\Modifiers\RemoveVoidReturnType;
+use Mikulas\Transpiler\Modifiers\RolloutSquareBracketExpansion;
 use PhpParser\Node;
 
 
@@ -22,6 +23,7 @@ class Transpiler
 		$this->modifier = new Chain([
 			new RemoveVoidReturnType(),
 			new RemoveClassConstantVisibility(),
+			new RolloutSquareBracketExpansion(),
 		]);
 	}
 
