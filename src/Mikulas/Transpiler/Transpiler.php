@@ -2,38 +2,36 @@
 
 namespace Mikulas\Transpiler;
 
-use Mikulas\Transpiler\Modifiers\Chain;
-use Mikulas\Transpiler\Modifiers\Modifier;
 use Mikulas\Transpiler\Modifiers\RemoveClassConstantVisibility;
 use Mikulas\Transpiler\Modifiers\RemoveVoidReturnType;
 use Mikulas\Transpiler\Modifiers\RolloutSquareBracketExpansion;
 use PhpParser\Node;
+use PhpParser\NodeTraverser;
 
 
 class Transpiler
 {
 
-	/** @var Modifier */
-	private $modifier;
+	/** @var NodeTraverser */
+	private $traverser;
 
 
 	public function __construct()
 	{
 		// TODO factory?
-		$this->modifier = new Chain([
-			new RemoveVoidReturnType(),
-			new RemoveClassConstantVisibility(),
-			new RolloutSquareBracketExpansion(),
-		]);
+		$this->traverser = new NodeTraverser(TRUE);
+		$this->traverser->addVisitor(new RemoveClassConstantVisibility());
+		$this->traverser->addVisitor(new RemoveVoidReturnType());
 	}
 
 
 	/**
 	 * @param Node[] $nodes
+	 * @return Node[]
 	 */
-	public function transpile(array $nodes)
+	public function transpile(array $nodes): array
 	{
-		($this->modifier)($nodes);
+		return $this->traverser->traverse($nodes);
 	}
 
 }

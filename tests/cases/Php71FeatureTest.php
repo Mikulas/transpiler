@@ -21,10 +21,10 @@ class Php71FeatureTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testNamedSquareBracketExpansion()
-	{
-		$this->assertTranspiledAs('namedSquareBracketExpansion');
-	}
+//	public function testNamedSquareBracketExpansion()
+//	{
+//		$this->assertTranspiledAs('namedSquareBracketExpansion');
+//	}
 
 
 	private function assertTranspiledAs(string $fixture)
