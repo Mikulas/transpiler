@@ -1,23 +1,32 @@
-<?php declare(strict_types=1);
+<?php
 
-function alpha() {}
+function alpha()
+{
+}
 
-abstract class Foo {
+abstract class Foo
+{
 
-	public function beta() {}
+    public function beta()
+    {
+    }
 
-	abstract protected function gamma();
+    protected abstract function gamma();
 
 }
 
-trait Bar {
+trait Bar
+{
 
-	function delta() {}
+    function delta()
+    {
+    }
 
 }
 
-interface Quz {
+interface Quz
+{
 
-	function epsilon();
+    function epsilon();
 
 }

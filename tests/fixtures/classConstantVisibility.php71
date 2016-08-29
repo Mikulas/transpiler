@@ -1,7 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
-class Foo {
-	public const A = 'a';
-	protected const B = 'b';
-	private const C = 'c';
+class Foo
+{
+    public const A = 'a';
+    protected const B = 'b';
+    private const C = 'c';
 }

@@ -2,8 +2,10 @@
 
 namespace Tests\Mikulas\Transpiler;
 
+use Mikulas\Transpiler\SourceCodeProcessor;
 use Mikulas\Transpiler\Transpiler;
 use PhpParser\ParserFactory;
+use PhpParser\PrettyPrinter;
 
 
 class Php71FeatureTest extends \PHPUnit_Framework_TestCase
@@ -21,26 +23,33 @@ class Php71FeatureTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-//	public function testNamedSquareBracketExpansion()
-//	{
-//		$this->assertTranspiledAs('namedSquareBracketExpansion');
-//	}
+	public function testNamedSquareBracketExpansion()
+	{
+		$this->assertTranspiledAs('namedSquareBracketExpansion');
+	}
 
 
 	private function assertTranspiledAs(string $fixture)
 	{
 		$parser = (new ParserFactory)->create(ParserFactory::ONLY_PHP7);
+		$transpiler = new Transpiler();
+		$printer = new PrettyPrinter\Standard();
+
+		$processor = new SourceCodeProcessor($parser, $transpiler, $printer);
 
 		$source71 = $this->getFixture("$fixture.php71");
-		$nodes = $parser->parse($source71);
+		$transpiled = $processor->transpile($source71);
+		$expected = $this->getFixture("$fixture.php70");
 
-		$transpiler = new Transpiler();
-		$transpiler->transpile($nodes);
+		static::assertSameExcludingEmptyLines($expected, $transpiled);
+	}
 
-		$source70 = $this->getFixture("$fixture.php70");
-		$expected = $parser->parse($source70);
 
-		static::assertEquals($expected, $nodes);
+	private function assertSameExcludingEmptyLines($expected, $actual, $message = '')
+	{
+		$expected = preg_replace('~\n\s*$~m', '', $expected);
+		$actual = preg_replace('~\n\s*$~m', '', $actual);
+		return static::assertSame($expected, $actual, $message);
 	}
 
 
