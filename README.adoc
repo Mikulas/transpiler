@@ -10,6 +10,14 @@ optionals (which are mostly useful for static analysis),
 but you are not forced to update production to unstable
 bleeding-edge versions.
 
+```
+$parser = (new ParserFactory)->create(ParserFactory::ONLY_PHP7);
+$transpiler = new Transpiler();
+
+$nodes = $parser->parse($sourceCode);
+$transpiler->transpile($nodes);
+```
+
 == Implemented AST modifiers:
 
 === PHP 7.1 -> 7.0
