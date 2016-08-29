@@ -1,8 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
-${'~transpiler-1'} = ['a' => 1, 'b' => 2, 'c' => 3];
-$a = ${'~transpiler-1'}['a'];
-$c = ${'~transpiler-1'}['c'];
+${'~transpiler-1'} = ['A' => 1, 'B' => 2, 'C' => 3];
+$a = ${'~transpiler-1'}['A'];
+$c = ${'~transpiler-1'}['C'];
 
-${'~transpiler-2'} = ['a' => 10];
-$a = ${'~transpiler-2'}['a'];
+${'~transpiler-2'} = ['A' => 10];
+$a = ${'~transpiler-2'}['A'];

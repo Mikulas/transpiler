@@ -22,6 +22,7 @@ class Transpiler
 		$this->traverser = new NodeTraverser(TRUE);
 		$this->traverser->addVisitor(new RemoveClassConstantVisibility());
 		$this->traverser->addVisitor(new RemoveVoidReturnType());
+		$this->traverser->addVisitor(new RolloutSquareBracketExpansion());
 	}
 
 

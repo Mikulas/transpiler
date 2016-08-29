@@ -2,34 +2,57 @@
 
 namespace Mikulas\Transpiler\Modifiers;
 
-use Mikulas\Transpiler\Ast;
 use PhpParser\Node;
+use PhpParser\Node\Scalar\String_;
+use PhpParser\NodeVisitorAbstract;
 
 
-class RolloutSquareBracketExpansion implements Modifier
+class RolloutSquareBracketExpansion extends NodeVisitorAbstract
 {
 
+	/** @var int */
+	private $newVariableId = 1;
+
+
 	/**
-	 * @param Node[] $nodes
 	 * @return Node[]
 	 */
-	public function __invoke(array $nodes)
+	public function leaveNode(Node $node)
 	{
+		if (! $node instanceof Node\Expr\Assign || ! $node->var instanceof Node\Expr\Array_) {
+			return NULL; // node stays as-is
+		}
+
 		ini_set('xdebug.var_display_max_depth', '6');
 
-		$counter = 1;
-		Ast::recursiveMap($nodes, function(Node $node) use (&$counter) {
-			if ($node instanceof Node\Expr\Assign && $node->var instanceof Node\Expr\Array_) {
-				$leftArray = $node->var;
+		// ['a' => $a, 'c' => $c] = ['a' => 1, 'b' => 2, 'c' => 3];
+		// $leftArray             = $node->expression
+		// # -->
+		// ${'~transpiler-1'} = ['a' => 1, 'b' => 2, 'c' => 3];
+		// $a = ${'~transpiler-1'}['a'];
+		// $c = ${'~transpiler-1'}['c'];
 
-				$rollout = new Node\Expr\Variable("~transpiler-$counter");
-				$node->var = $rollout;
+		$nodes = [];
+		$leftArray = $node->var;
 
-				// TODO iterator instance that can modify the tree inplace
+		// ${'~transpiler-1'} = ['a' => 1, 'b' => 2, 'c' => 3];
+		$rollout = new Node\Expr\Variable(
+			new String_("~transpiler-{$this->newVariableId}")
+		);
+		$this->newVariableId += 1;
+		$node->var = $rollout;
+		$nodes[] = $node;
 
-				$counter += 1;
-			}
-		});
+		// $a = ${'~transpiler-1'}['a'];
+		/** @var Node\Expr\ArrayItem $item */
+		foreach ($leftArray->items as $item) {
+			/** @var Node\Expr\Variable $var */
+			$nodes[] = new Node\Expr\Assign($item->value,
+				new Node\Expr\ArrayDimFetch($rollout, $item->key)
+			);
+		}
+
+		return $nodes;
 	}
 
 }
