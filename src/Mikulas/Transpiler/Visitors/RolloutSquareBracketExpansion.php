@@ -43,16 +43,58 @@ class RolloutSquareBracketExpansion extends NodeVisitorAbstract
 		$node->var = $rollout;
 		$nodes[] = $node;
 
+
+		// TODO traverse $leftArray and create new node whenever
+		// you visit a variable, using the stack
+
 		// $a = ${'~transpiler-1'}['a'];
-		/** @var Node\Expr\ArrayItem $item */
-		foreach ($leftArray->items as $item) {
+		foreach ($this->getVariableDimensions($leftArray->items) as list($variable, $dimensions)) {
 			/** @var Node\Expr\Variable $var */
-			$nodes[] = new Node\Expr\Assign($item->value,
-				new Node\Expr\ArrayDimFetch($rollout, $item->key)
+			$nodes[] = new Node\Expr\Assign($variable,
+				$this->nestedDimFetch($rollout, $dimensions)
 			);
 		}
 
 		return $nodes;
+	}
+
+
+	private function nestedDimFetch(Node\Expr $var, array $dimensions): Node\Expr\ArrayDimFetch
+	{
+		foreach ($dimensions as $dimension) {
+			$var = new Node\Expr\ArrayDimFetch($var, $dimension);
+		}
+		return $var;
+	}
+
+
+	/**
+	 * Convert complex left sides such as
+	 * [['A' => $a], ['B' => $b]]
+	 * to
+	 * [$a, [0, 'A']], [$b, [0, 'B]]
+	 *
+	 * @param Node\Expr\ArrayItem[] $items
+	 * @return array [[variable, dimension stack], ...]
+	 */
+	private function getVariableDimensions(array $items, array $stack = [])
+	{
+		foreach ($items as $index => $item) {
+			$newStack = $stack;
+			$newStack[] = $item->key === NULL ? new Node\Scalar\LNumber($index) : $item->key;
+
+			if ($item->value instanceof Node\Expr\Variable) {
+				yield [$item->value, $newStack];
+
+			} elseif ($item->value instanceof Node\Expr\Array_) {
+				yield from $this->getVariableDimensions($item->value->items, $newStack);
+
+			} else {
+				throw new \Exception('invalid implementation'); // TODO
+			}
+		}
+
+		return [];
 	}
 
 }

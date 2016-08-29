@@ -14,8 +14,8 @@ class Php71FeatureTest extends \PHPUnit_Framework_TestCase
 	public function getFeatureList(): array
 	{
 		return [
-			['voidReturnType'],
-			['classConstantVisibility'],
+//			['voidReturnType'],
+//			['classConstantVisibility'],
 			['namedSquareBracketExpansion'],
 		];
 	}
