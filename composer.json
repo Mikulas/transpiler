@@ -11,6 +11,9 @@
     "autoload": {
         "psr-4": {"Mikulas\\Transpiler\\": "src/"}
     },
+    "autoload-dev": {
+        "classmap": ["tests/inc"]
+    },
     "license": "MIT",
     "authors": [
         {

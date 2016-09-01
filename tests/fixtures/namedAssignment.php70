@@ -11,3 +11,16 @@ $b = ${'~transpiler-2'}[1]['B'];
 ${'~transpiler-3'} = ['X' => ['A' => 10], 'Y' => ['B' => 20]];
 $a = ${'~transpiler-3'}['X']['A'];
 $b = ${'~transpiler-3'}['Y']['B'];
+
+
+${'~transpiler-4'} = ['A' => 1, 'B' => 2, 'C' => 3];
+$a = ${'~transpiler-4'}['A'];
+$c = ${'~transpiler-4'}['C'];
+
+${'~transpiler-5'} = [['A' => 10], ['B' => 20]];
+$a = ${'~transpiler-5'}[0]['A'];
+$b = ${'~transpiler-5'}[1]['B'];
+
+${'~transpiler-6'} = ['X' => ['A' => 10], 'Y' => ['B' => 20]];
+$a = ${'~transpiler-6'}['X']['A'];
+$b = ${'~transpiler-6'}['Y']['B'];

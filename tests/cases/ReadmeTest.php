@@ -4,6 +4,7 @@ namespace Tests\Mikulas\Transpiler;
 
 use Mikulas\Transpiler\Transpiler;
 use PhpParser\ParserFactory;
+use Tests\Helper;
 
 
 class ReadmeTest extends \PHPUnit_Framework_TestCase
@@ -15,19 +16,18 @@ class ReadmeTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * @dataProvider getReadmeSnippets
 	 */
-	public function testAllReadmeExamplesCompile(string $source71, string $source70)
+	public function testAllReadmeExamplesCompile(string $input, string $expected)
 	{
 		$parser = (new ParserFactory)->create(ParserFactory::ONLY_PHP7);
 
 		$prefix = "<?php\n";
-		$nodes = $parser->parse($prefix . $source71);
+		$expected = "$prefix$expected";
+		$input = "$prefix$input";
 
-		$transpiler = new Transpiler();
-		$transpiler->transpile($nodes);
+		$parser->parse($input);
 
-		if ($source70 !== '') {
-			$expected = $parser->parse($prefix . $source70);
-			static::assertEquals($expected, $nodes);
+		if ($expected !== '') {
+			Helper::assertTranspiledAs($expected, $input);
 		}
 	}
 

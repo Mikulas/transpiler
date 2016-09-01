@@ -7,7 +7,7 @@ use PhpParser\Node\Scalar\String_;
 use PhpParser\NodeVisitorAbstract;
 
 
-class RolloutSquareBracketExpansion extends NodeVisitorAbstract
+class ExpandNamedAssignment extends NodeVisitorAbstract
 {
 
 	/** @var int */
@@ -19,21 +19,24 @@ class RolloutSquareBracketExpansion extends NodeVisitorAbstract
 	 */
 	public function leaveNode(Node $node)
 	{
-		if (! $node instanceof Node\Expr\Assign || ! $node->var instanceof Node\Expr\Array_) {
-			return NULL; // node stays as-is
+		if (! $node instanceof Node\Expr\Assign) {
+			return NULL; // node stays as-is, not assignment
+		}
+		if (! $node->var instanceof Node\Expr\Array_ && ! $node->var instanceof Node\Expr\List_) {
+			return NULL; // node stays as-is, simple assignment
 		}
 
 		ini_set('xdebug.var_display_max_depth', '6');
 
 		// ['a' => $a, 'c' => $c] = ['a' => 1, 'b' => 2, 'c' => 3];
-		// $leftArray             = $node->expression
+		// $leftSide              = $node->expression
 		// # -->
 		// ${'~transpiler-1'} = ['a' => 1, 'b' => 2, 'c' => 3];
 		// $a = ${'~transpiler-1'}['a'];
 		// $c = ${'~transpiler-1'}['c'];
 
 		$nodes = [];
-		$leftArray = $node->var;
+		$leftSide = $node->var;
 
 		// ${'~transpiler-1'} = ['a' => 1, 'b' => 2, 'c' => 3];
 		$rollout = new Node\Expr\Variable(
@@ -48,7 +51,7 @@ class RolloutSquareBracketExpansion extends NodeVisitorAbstract
 		// you visit a variable, using the stack
 
 		// $a = ${'~transpiler-1'}['a'];
-		foreach ($this->getVariableDimensions($leftArray->items) as list($variable, $dimensions)) {
+		foreach ($this->getVariableDimensions($leftSide->items) as list($variable, $dimensions)) {
 			/** @var Node\Expr\Variable $var */
 			$nodes[] = new Node\Expr\Assign($variable,
 				$this->nestedDimFetch($rollout, $dimensions)
@@ -81,12 +84,20 @@ class RolloutSquareBracketExpansion extends NodeVisitorAbstract
 	{
 		foreach ($items as $index => $item) {
 			$newStack = $stack;
+
+			if ($item instanceof Node\Expr\List_) {
+				$newStack[] = new Node\Scalar\LNumber($index);
+				yield from $this->getVariableDimensions($item->items, $newStack);
+				continue;
+			}
+
+			assert($item instanceof Node\Expr\ArrayItem);
 			$newStack[] = $item->key === NULL ? new Node\Scalar\LNumber($index) : $item->key;
 
 			if ($item->value instanceof Node\Expr\Variable) {
 				yield [$item->value, $newStack];
 
-			} elseif ($item->value instanceof Node\Expr\Array_) {
+			} elseif ($item->value instanceof Node\Expr\Array_  || $item->value instanceof Node\Expr\List_) {
 				yield from $this->getVariableDimensions($item->value->items, $newStack);
 
 			} else {

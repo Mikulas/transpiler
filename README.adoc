@@ -18,11 +18,15 @@ bleeding-edge versions.
 ==== Remove void return types
 
 ```
-function foo(): void {}
+function foo(): void
+{
+}
 
 # -->
 
-function foo() {}
+function foo()
+{
+}
 ```
 
 __Limitations:__ `ReflectionFunctionAbstract::getReturnType()` and `hasReturnType()` will return `NULL` and `FALSE` respectively instead of original values.
@@ -30,33 +34,41 @@ __Limitations:__ `ReflectionFunctionAbstract::getReturnType()` and `hasReturnTyp
 ==== Remove class constant visibilities
 
 ```
-class Foo {
-	public const A = 'a';
-	protected const B = 'b';
-	private const C = 'c';
+class Foo
+{
+    public const A = 'a';
+    protected const B = 'b';
+    private const C = 'c';
 }
 
 # -->
 
-class Foo {
-	const A = 'a';
-	const B = 'b';
-	const C = 'c';
+class Foo
+{
+    const A = 'a';
+    const B = 'b';
+    const C = 'c';
 }
 ```
 
 __Limitations:__ none
 
-==== Rollout named squared bracket expansion
+==== Rollout named assignment
 
 ```
 ['X' => ['A' => $a, 'B' => $b]] = ['X' => ['A' => 10, 'B' => 20]];
+list('T' => list('U' => $u, 'V' => $v)) = ['T' => ['U' => 15, 'V' => 19]];
 
 # -->
 
 ${'~transpiler-1'} = ['X' => ['A' => 10, 'B' => 20]];
 $a = ${'~transpiler-1'}['X']['A'];
 $b = ${'~transpiler-1'}['X']['B'];
+
+${'~transpiler-2'} = ['T' => ['U' => 15, 'V' => 19]];
+$u = ${'~transpiler-2'}['T']['U'];
+$v = ${'~transpiler-2'}['T']['V'];
+
 ```
 
 __Limitations:__ slightly worse performance, introduces new variable

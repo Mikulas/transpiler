@@ -4,7 +4,7 @@ namespace Mikulas\Transpiler;
 
 use Mikulas\Transpiler\Modifiers\RemoveClassConstantVisibility;
 use Mikulas\Transpiler\Modifiers\RemoveVoidReturnType;
-use Mikulas\Transpiler\Modifiers\RolloutSquareBracketExpansion;
+use Mikulas\Transpiler\Modifiers\ExpandNamedAssignment;
 use PhpParser\Node;
 use PhpParser\NodeTraverser;
 
@@ -22,7 +22,7 @@ class Transpiler
 		$this->traverser = new NodeTraverser(TRUE);
 		$this->traverser->addVisitor(new RemoveClassConstantVisibility());
 		$this->traverser->addVisitor(new RemoveVoidReturnType());
-		$this->traverser->addVisitor(new RolloutSquareBracketExpansion());
+		$this->traverser->addVisitor(new ExpandNamedAssignment());
 	}
 
 
