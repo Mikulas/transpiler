@@ -72,3 +72,31 @@ $v = ${'~transpiler-2'}['T']['V'];
 ```
 
 __Limitations:__ slightly worse performance, introduces new variable
+
+=== Remove nullable return type
+
+```
+function sum(): ?int
+{
+}
+
+# -->
+
+function sum()
+{
+}
+```
+
+=== Rewrite nullable parameter
+
+```
+function sum(?int $a, ?int b)
+{
+}
+
+# -->
+
+function sum(int $a = NULL, int b = NULL)
+{
+}
+```
