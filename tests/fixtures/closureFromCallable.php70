@@ -1,29 +1,21 @@
 <?php
 
-class Foo
-{
-    public function bar()
-    {
-    }
-
-    public static function qaz()
-    {
-    }
-}
-
-$intdiv = function (...$args) {
-    return call_user_func_array('intdiv', $args);
+function () {
+    return call_user_func_array('intdiv', func_get_args());
 };
 
-$foo = new Foo();
-$bar = function (...$args) use(&$foo) {
-    return call_user_func_array([$foo, 'bar'], $args);
+function () use(&$foo) {
+    return call_user_func_array([$foo, 'bar'], func_get_args());
 };
 
-$qazD = function (...$args) use(&$foo) {
-    return call_user_func_array([$foo, 'qaz'], $args);
+function () use(&$foo) {
+    return call_user_func_array([$foo, 'qaz'], func_get_args());
 };
 
-$qazS = function (...$args) {
-    return call_user_func_array([Foo::class, 'qaz'], $args);
+function () {
+    return call_user_func_array([Foo::class, 'qaz'], func_get_args());
+};
+
+function () use(&$foo, &$a, &$b) {
+    return call_user_func_array($foo($a = $b), func_get_args());
 };

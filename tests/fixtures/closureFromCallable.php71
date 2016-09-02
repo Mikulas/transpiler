@@ -1,19 +1,9 @@
 <?php
 
-class Foo
-{
-	public function bar()
-	{
-	}
+Closure::fromCallable('intdiv');
 
-	public static function qaz()
-	{
-	}
-}
+\Closure::fromCallable([$foo, 'bar']);
+Closure::fromCallable([$foo, 'qaz']);
+Closure::fromCallable([Foo::class, 'qaz']);
 
-$intdiv = Closure::fromCallable('intdiv');
-
-$foo = new Foo();
-$bar = \Closure::fromCallable([$foo, 'bar']);
-$qazD = Closure::fromCallable([$foo, 'qaz']);
-$qazS = Closure::fromCallable([Foo::class, 'qaz']);
+Closure::fromCallable($foo($a = $b));

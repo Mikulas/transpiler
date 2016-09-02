@@ -119,22 +119,26 @@ function compute($arr)
 === Convert `Closure::fromCallable`
 
 ```
-$intdiv = Closure::fromCallable('intdiv');
-$bar = Closure::fromCallable([$foo, 'bar']);
-$qaz = Closure::fromCallable([Foo::class, 'qaz']);
+Closure::fromCallable('intdiv');
+Closure::fromCallable([$foo, 'bar']);
+Closure::fromCallable([Foo::class, 'qaz']);
+Closure::fromCallable($foo($a = $b));
 
 # -->
 
-
-$intdiv = function (...$args) {
-    return call_user_func_array('intdiv', $args);
+function () {
+    return call_user_func_array('intdiv', func_get_args());
 };
 
-$bar = function (...$args) use(&$foo) {
-    return call_user_func_array([$foo, 'bar'], $args);
+function () use(&$foo) {
+    return call_user_func_array([$foo, 'bar'], func_get_args());
 };
 
-$qaz = function (...$args) {
-    return call_user_func_array([Foo::class, 'qaz'], $args);
+function () {
+    return call_user_func_array([Foo::class, 'qaz'], func_get_args());
+};
+
+function () use(&$foo, &$a, &$b) {
+    return call_user_func_array($foo($a = $b), func_get_args());
 };
 ```
