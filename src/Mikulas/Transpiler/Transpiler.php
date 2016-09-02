@@ -3,10 +3,12 @@
 namespace Mikulas\Transpiler;
 
 use Mikulas\Transpiler\Modifiers\RemoveClassConstantVisibility;
+use Mikulas\Transpiler\Modifiers\RemoveIterableParameterType;
+use Mikulas\Transpiler\Modifiers\RemoveIterableReturnType;
 use Mikulas\Transpiler\Modifiers\RemoveNullableReturnValues;
 use Mikulas\Transpiler\Modifiers\RemoveVoidReturnType;
 use Mikulas\Transpiler\Modifiers\ExpandNamedAssignment;
-use Mikulas\Transpiler\Modifiers\RewriteNullableParameters;
+use Mikulas\Transpiler\Modifiers\RewriteNullableParameterType;
 use PhpParser\Node;
 use PhpParser\NodeTraverser;
 
@@ -26,7 +28,9 @@ class Transpiler
 		$this->traverser->addVisitor(new RemoveVoidReturnType());
 		$this->traverser->addVisitor(new ExpandNamedAssignment());
 		$this->traverser->addVisitor(new RemoveNullableReturnValues());
-		$this->traverser->addVisitor(new RewriteNullableParameters());
+		$this->traverser->addVisitor(new RewriteNullableParameterType());
+		$this->traverser->addVisitor(new RemoveIterableReturnType());
+		$this->traverser->addVisitor(new RemoveIterableParameterType());
 	}
 
 

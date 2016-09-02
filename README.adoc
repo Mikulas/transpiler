@@ -100,3 +100,17 @@ function sum(int $a = NULL, int $b = NULL)
 {
 }
 ```
+
+=== Remove iterable type
+
+```
+function compute(iterable $arr): iterable
+{
+}
+
+# -->
+
+function compute($arr)
+{
+}
+```

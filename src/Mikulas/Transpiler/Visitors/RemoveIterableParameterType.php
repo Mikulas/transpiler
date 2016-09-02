@@ -5,13 +5,13 @@ namespace Mikulas\Transpiler\Modifiers;
 use PhpParser\Node;
 
 
-class RewriteNullableParameters extends NodeFilteringVisitor
+class RemoveIterableParameterType extends NodeFilteringVisitor
 {
 
 	public function filter(Node $node): bool
 	{
 		return $node instanceof Node\Param
-			&& $node->type instanceof Node\NullableType;
+			&& $node->type === 'iterable';
 	}
 
 
@@ -20,10 +20,7 @@ class RewriteNullableParameters extends NodeFilteringVisitor
 	 */
 	public function transpile(Node $node): Node
 	{
-		/** @var Node\NullableType $nullable */
-		$nullable = $node->type;
-		$node->type = $nullable->type;
-		$node->default = new Node\Expr\ConstFetch(new Node\Name('NULL'));
+		$node->type = NULL;
 		return $node;
 	}
 
