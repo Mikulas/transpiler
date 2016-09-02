@@ -8,6 +8,7 @@ use Mikulas\Transpiler\Modifiers\RemoveIterableReturnType;
 use Mikulas\Transpiler\Modifiers\RemoveNullableReturnValues;
 use Mikulas\Transpiler\Modifiers\RemoveVoidReturnType;
 use Mikulas\Transpiler\Modifiers\ExpandNamedAssignment;
+use Mikulas\Transpiler\Modifiers\RewriteClosureFromCallable;
 use Mikulas\Transpiler\Modifiers\RewriteNullableParameterType;
 use PhpParser\Node;
 use PhpParser\NodeTraverser;
@@ -31,6 +32,7 @@ class Transpiler
 		$this->traverser->addVisitor(new RewriteNullableParameterType());
 		$this->traverser->addVisitor(new RemoveIterableReturnType());
 		$this->traverser->addVisitor(new RemoveIterableParameterType());
+		$this->traverser->addVisitor(new RewriteClosureFromCallable());
 	}
 
 

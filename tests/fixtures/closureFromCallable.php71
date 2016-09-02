@@ -14,6 +14,6 @@ class Foo
 $intdiv = Closure::fromCallable('intdiv');
 
 $foo = new Foo();
-$bar = Closure::fromCallable([$foo, 'bar']);
+$bar = \Closure::fromCallable([$foo, 'bar']);
 $qazD = Closure::fromCallable([$foo, 'qaz']);
 $qazS = Closure::fromCallable([Foo::class, 'qaz']);
