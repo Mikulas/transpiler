@@ -3,3 +3,7 @@
 function sum(int $a = NULL, int $b = NULL)
 {
 }
+
+function sum(int $a = 0, int $b = 0)
+{
+}

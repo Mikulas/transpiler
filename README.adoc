@@ -87,7 +87,7 @@ function sum()
 }
 ```
 
-=== Rewrite nullable parameter
+=== Convert nullable parameter
 
 ```
 function sum(?int $a, ?int $b)

@@ -23,7 +23,10 @@ class RewriteNullableParameterType extends NodeFilteringVisitor
 		/** @var Node\NullableType $nullable */
 		$nullable = $node->type;
 		$node->type = $nullable->type;
-		$node->default = new Node\Expr\ConstFetch(new Node\Name('NULL'));
+
+		if ($node->default === NULL) {
+			$node->default = new Node\Expr\ConstFetch(new Node\Name('NULL'));
+		}
 		return $node;
 	}
 
