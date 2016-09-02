@@ -1,5 +1,7 @@
 <?php
 
+function keep(): int {}
+
 function alpha(): void {}
 
 abstract class Foo {

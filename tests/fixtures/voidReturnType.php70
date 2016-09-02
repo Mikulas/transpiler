@@ -1,5 +1,9 @@
 <?php
 
+function keep() : int
+{
+}
+
 function alpha()
 {
 }

@@ -16,9 +16,11 @@ class RemoveVoidReturnType extends NodeFilteringVisitor
 	 */
 	public function filter(Node $node): bool
 	{
-		return $node instanceof Node\Stmt\Function_
-			|| $node instanceof Node\Stmt\ClassMethod
-			|| $node instanceof Node\Expr\Closure;
+		return (
+			$node instanceof Node\Stmt\Function_ ||
+			$node instanceof Node\Stmt\ClassMethod ||
+			$node instanceof Node\Expr\Closure
+		) && $node->returnType === 'void';
 	}
 
 
