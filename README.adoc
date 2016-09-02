@@ -73,6 +73,11 @@ $v = ${'~transpiler-2'}['T']['V'];
 
 __Limitations:__ slightly worse performance, introduces new variable
 
+Dynamic mutating keys are not supported.
+```
+[$x++ => $a, $x++ => $b] = [10, 20];
+```
+
 === Remove nullable return type
 
 ```
