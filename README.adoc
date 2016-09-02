@@ -114,3 +114,6 @@ function compute($arr)
 {
 }
 ```
+
+
+=== Convert `Closure::fromCallable`

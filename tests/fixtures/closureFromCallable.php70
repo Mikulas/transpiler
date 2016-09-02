@@ -1,0 +1,29 @@
+<?php
+
+class Foo
+{
+	public function bar()
+	{
+	}
+
+	public static function qaz()
+	{
+	}
+}
+
+$intdiv = function(...$args) {
+	return intdiv(...$args);
+};
+
+$foo = new Foo();
+$bar = function(...$args) use ($foo) {
+	return $foo->bar(...$args);
+};
+
+$qazD = function(...$args) use ($foo) {
+	return $foo->qaz(...$args);
+};
+
+$qazS = function(...$args) use ($foo) {
+	return Foo::qaz(...$args);
+};
