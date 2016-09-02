@@ -1,5 +1,0 @@
-<?php
-
-function sum(int $a = NULL, int b = NULL)
-{
-}

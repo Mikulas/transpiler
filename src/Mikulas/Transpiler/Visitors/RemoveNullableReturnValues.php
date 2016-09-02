@@ -3,20 +3,21 @@
 namespace Mikulas\Transpiler\Modifiers;
 
 use PhpParser\Node;
+use PhpParser\Node\FunctionLike;
 
 
-class RemoveVoidReturnType extends NodeFilteringVisitor
+class RemoveNullableReturnValues extends NodeFilteringVisitor
 {
 
 	public function filter(Node $node): bool
 	{
-		return $node instanceof Node\FunctionLike
-			&& $node->getReturnType() === 'void';
+		return $node instanceof FunctionLike
+			&& $node->getReturnType() instanceof Node\NullableType;
 	}
 
 
 	/**
-	 * @param Node\Stmt\Function_|Node\Stmt\ClassMethod|Node\Expr\Closure $node
+	 * @param FunctionLike $node
 	 */
 	public function transpile(Node $node): Node
 	{

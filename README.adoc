@@ -90,13 +90,13 @@ function sum()
 === Rewrite nullable parameter
 
 ```
-function sum(?int $a, ?int b)
+function sum(?int $a, ?int $b)
 {
 }
 
 # -->
 
-function sum(int $a = NULL, int b = NULL)
+function sum(int $a = NULL, int $b = NULL)
 {
 }
 ```
