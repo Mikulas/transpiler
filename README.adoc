@@ -5,6 +5,8 @@
 
 PHP source code transformations.
 
+image:https://circleci.com/gh/Mikulas/transpiler.svg?style=svg&circle-token=95af859daa8a8d404100caf22e52269e447012f3["CircleCI", link="https://circleci.com/gh/Mikulas/transpiler"]
+
 toc::[]
 
 == What Is It Good For?

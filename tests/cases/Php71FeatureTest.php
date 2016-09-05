@@ -17,7 +17,7 @@ class Php71FeatureTest extends \PHPUnit_Framework_TestCase
 			['nullableTypes'],
 			['iterable'],
 			['closureFromCallable'],
-			['multiCatchExceptionHandling']
+			['multiCatchExceptionHandling'],
 		];
 	}
 
