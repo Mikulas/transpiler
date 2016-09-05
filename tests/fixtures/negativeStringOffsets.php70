@@ -1,0 +1,22 @@
+<?php
+
+${'~transpiler-1'} = $string;
+${'~transpiler-1'}[is_string(${'~transpiler-1'}) ? strlen(${'~transpiler-1'}) - 3 : -3];
+
+${'~transpiler-2'} = $string;
+${'~transpiler-2'}{strlen(${'~transpiler-2'}) - 1};
+
+${'~transpiler-3'} = 'haystack';
+strpos(${'~transpiler-3'}, 'needle', strlen(${'~transpiler-3'}) - 1);
+
+${'~transpiler-4'} = 'haystack';
+stripos(${'~transpiler-4'}, 'needle', strlen(${'~transpiler-4'}) - 1);
+
+${'~transpiler-5'} = 'haystack';
+iconv_strpos(${'~transpiler-5'}, 'needle', iconv_strlen(${'~transpiler-5'}, 'UTF-8') - 1, 'UTF-8');
+
+${'~transpiler-6'} = 'haystack';
+mb_strpos(${'~transpiler-6'}, 'needle', mb_strlen(${'~transpiler-6'}, 'UTF-8') - 1, 'UTF-8');
+
+${'~transpiler-7'} = 'haystack';
+mb_stripos(${'~transpiler-7'}, 'needle', mb_strlen(${'~transpiler-7'}, 'UTF-8') - 1, 'UTF-8');

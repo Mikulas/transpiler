@@ -1,0 +1,12 @@
+<?php
+
+$string[-3];
+$string{-1};
+
+strpos('haystack', 'needle', -1);
+stripos('haystack', 'needle', -1);
+
+iconv_strpos('haystack', 'needle', -1, 'UTF-8');
+
+mb_strpos('haystack', 'needle', -1, 'UTF-8');
+mb_stripos('haystack', 'needle', -1, 'UTF-8');

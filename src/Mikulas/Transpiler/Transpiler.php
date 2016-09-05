@@ -10,6 +10,7 @@ use Mikulas\Transpiler\Modifiers\RemoveNullableReturnValues;
 use Mikulas\Transpiler\Modifiers\RemoveVoidReturnType;
 use Mikulas\Transpiler\Modifiers\ExpandNamedAssignment;
 use Mikulas\Transpiler\Modifiers\RewriteClosureFromCallable;
+use Mikulas\Transpiler\Modifiers\RewriteNegativeStringOffsets;
 use Mikulas\Transpiler\Modifiers\RewriteNullableParameterType;
 use PhpParser\Node;
 use PhpParser\NodeTraverser;
@@ -36,6 +37,7 @@ class Transpiler
 		$this->traverser->addVisitor(new RemoveIterableParameterType());
 		$this->traverser->addVisitor(new RewriteClosureFromCallable());
 		$this->traverser->addVisitor(new ExpandMultiCatchHandler());
+		$this->traverser->addVisitor(new RewriteNegativeStringOffsets($variableFactory));
 	}
 
 

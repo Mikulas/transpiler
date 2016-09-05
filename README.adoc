@@ -171,3 +171,36 @@ try {
     handler();
 }
 ```
+
+=== Rewrite negative string offsets
+
+```
+$string[-3];
+strpos('haystack', 'needle', -1);
+iconv_strpos('haystack', 'needle', -1, 'UTF-8');
+mb_strpos('haystack', 'needle', -1, 'UTF-8');
+
+# -->
+
+$string[is_string($string) ? strlen($string) - 3 : -3];
+
+${'~transpiler-1'} = 'haystack';
+strpos(${'~transpiler-1'}, 'needle', strlen(${'~transpiler-1'}) - 1);
+
+${'~transpiler-3'} = 'haystack';
+iconv_strpos(${'~transpiler-3'}, 'needle', iconv_strlen(${'~transpiler-3'}, 'UTF-8') - 1, 'UTF-8');
+
+${'~transpiler-4'} = 'haystack';
+mb_strpos(${'~transpiler-4'}, 'needle', mb_strlen(${'~transpiler-4'}, 'UTF-8') - 1, 'UTF-8');
+```
+
+__Limitations:__
+
+Those functions are not supported
+- `substr_count`
+- `grapheme_strpos`
+- `grapheme_stripos`
+- `grapheme_extract`
+- `file_get_contents`
+- `mb_strimwidth`
+- `mb_ereg_search_setpos`
