@@ -20,6 +20,36 @@ class ExpandNamedAssignment extends NodeVisitorAbstract
 	}
 
 
+	public function enterNode(Node $node)
+	{
+		// transform
+		//  while (list(...) = $right) {$block;}
+		//  foreach ($left as list(...)) {$block;}
+		// to
+		//  while ($temp = $right) {list(...) = $temp; $block;}
+		//  foreach ($left as $temp) {list(...) = $temp; $block;}
+
+		if (
+			$node instanceof Node\Stmt\While_ &&
+			$node->cond instanceof Node\Expr\Assign &&
+			$node->cond->var instanceof Node\Expr\List_
+		) {
+			$list = $node->cond->var;
+			$tempVar = $this->variableFactory->create();
+			$node->cond->var = $tempVar;
+			$assignment = new Node\Expr\Assign($list, $tempVar);
+			array_unshift($node->stmts, $assignment);
+
+		} elseif ($node instanceof Node\Stmt\Foreach_) {
+			$list = $node->valueVar;
+			$tempVar = $this->variableFactory->create();
+			$node->valueVar = $tempVar;
+			$assignment = new Node\Expr\Assign($list, $tempVar);
+			array_unshift($node->stmts, $assignment);
+		}
+	}
+
+
 	/**
 	 * @return Node[]
 	 */
@@ -42,14 +72,15 @@ class ExpandNamedAssignment extends NodeVisitorAbstract
 		$nodes = [];
 		$leftSide = $node->var;
 
-		// ${'~transpiler-1'} = ['a' => 1, 'b' => 2, 'c' => 3];
-		$rollout = $this->variableFactory->create();
-		$node->var = $rollout;
-		$nodes[] = $node;
-
-
-		// TODO traverse $leftArray and create new node whenever
-		// you visit a variable, using the stack
+		if ($node->expr instanceof Node\Expr\Variable) {
+			// simple case `list() = $var`, temp variable is not required
+			$rollout = $node->expr;
+		} else {
+			// ${'~transpiler-1'} = ['a' => 1, 'b' => 2, 'c' => 3];
+			$rollout = $this->variableFactory->create();
+			$node->var = $rollout;
+			$nodes[] = $node;
+		}
 
 		// $a = ${'~transpiler-1'}['a'];
 		foreach ($this->getVariableDimensions($leftSide->items) as list($variable, $dimensions)) {

@@ -67,6 +67,9 @@ __Limitations:__ none
 ['X' => ['A' => $a, 'B' => $b]] = ['X' => ['A' => 10, 'B' => 20]];
 list('T' => list('U' => $u, 'V' => $v)) = ['T' => ['U' => 15, 'V' => 19]];
 
+while (list($a, $b) = $right) {
+    block();
+}
 # -->
 
 ${'~transpiler-1'} = ['X' => ['A' => 10, 'B' => 20]];
@@ -76,6 +79,12 @@ $b = ${'~transpiler-1'}['X']['B'];
 ${'~transpiler-2'} = ['T' => ['U' => 15, 'V' => 19]];
 $u = ${'~transpiler-2'}['T']['U'];
 $v = ${'~transpiler-2'}['T']['V'];
+
+while (${'~transpiler-3'} = $right) {
+    $a = ${'~transpiler-3'}[0];
+    $b = ${'~transpiler-3'}[1];
+    block();
+}
 ```
 
 __Limitations:__ slightly worse performance, introduces new variable

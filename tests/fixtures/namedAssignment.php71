@@ -14,3 +14,13 @@ list(list('A' => $a), list('B' => $b)) = [['A' => 10], ['B' => 20]];
 list('X' => list('A' => $a), 'Y' => list('B' => $b)) = ['X' => ['A' => 10], 'Y' => ['B' => 20]];
 
 [, $second] = [0, 1];
+
+while (list($a, $b) = $right) {
+	block();
+}
+
+foreach ($left as list($a, $b)) {
+	block();
+}
+
+list($a) = $simple;
