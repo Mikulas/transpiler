@@ -1,5 +1,5 @@
 {
-    "name": "mikulas/transpile",
+    "name": "mikulas/transpiler",
     "type": "project",
     "require": {
         "php": "^7.0",
