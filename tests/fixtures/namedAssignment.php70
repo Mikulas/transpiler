@@ -24,3 +24,6 @@ $b = ${'~transpiler-5'}[1]['B'];
 ${'~transpiler-6'} = ['X' => ['A' => 10], 'Y' => ['B' => 20]];
 $a = ${'~transpiler-6'}['X']['A'];
 $b = ${'~transpiler-6'}['Y']['B'];
+
+${'~transpiler-7'} = [0, 1];
+$second = ${'~transpiler-7'}[1];

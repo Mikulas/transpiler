@@ -91,6 +91,10 @@ class ExpandNamedAssignment extends NodeVisitorAbstract
 				$newStack[] = new Node\Scalar\LNumber($index);
 				yield from $this->getVariableDimensions($item->items, $newStack);
 				continue;
+
+			} elseif ($item === NULL) {
+				// happens when list(, $second)
+				continue;
 			}
 
 			assert($item instanceof Node\Expr\ArrayItem);
