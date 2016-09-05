@@ -14,6 +14,7 @@ class RewriteClosureFromCallable extends NodeFilteringVisitor
 	public function filter(Node $node): bool
 	{
 		return $node instanceof Node\Expr\StaticCall
+			&& $node->class instanceof Node\Name
 			&& $node->class->toString() === 'Closure' // TODO properly resolve to FQN
 			&& $node->name === 'fromCallable';
 	}

@@ -155,6 +155,8 @@ function () use(&$foo, &$a, &$b) {
 };
 ```
 
+__Limitations:__ FQN is not resolved, so aliases to Closure do not work. Dynamic invocation does not work either (such as from `call_user_func`).
+
 
 === Expand multi catch exception handlers
 

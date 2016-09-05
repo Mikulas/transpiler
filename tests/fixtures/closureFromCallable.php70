@@ -19,3 +19,5 @@ function () {
 function () use(&$foo, &$a, &$b) {
     return call_user_func_array($foo($a = $b), func_get_args());
 };
+
+call_user_func(['Closure', 'fromCallable']);
