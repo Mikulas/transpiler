@@ -2,7 +2,6 @@
 
 namespace Tests\Mikulas\Transpiler;
 
-use Mikulas\Transpiler\Transpiler;
 use PhpParser\ParserFactory;
 use Tests\Helper;
 

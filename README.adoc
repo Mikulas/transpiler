@@ -1,7 +1,11 @@
 = Transpiler
+:toc: macro
+:!toc-title:
 :source-language: php
 
 PHP source code transformations.
+
+toc::[]
 
 == What Is It Good For?
 
