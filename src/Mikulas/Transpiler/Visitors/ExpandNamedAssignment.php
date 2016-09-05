@@ -4,7 +4,6 @@ namespace Mikulas\Transpiler\Modifiers;
 
 use Mikulas\Transpiler\VariableFactory;
 use PhpParser\Node;
-use PhpParser\Node\Scalar\String_;
 use PhpParser\NodeVisitorAbstract;
 
 
@@ -100,14 +99,11 @@ class ExpandNamedAssignment extends NodeVisitorAbstract
 			assert($item instanceof Node\Expr\ArrayItem);
 			$newStack[] = $item->key === NULL ? new Node\Scalar\LNumber($index) : $item->key;
 
-			if ($item->value instanceof Node\Expr\Variable) {
-				yield [$item->value, $newStack];
-
-			} elseif ($item->value instanceof Node\Expr\Array_  || $item->value instanceof Node\Expr\List_) {
+			if ($item->value instanceof Node\Expr\Array_  || $item->value instanceof Node\Expr\List_) {
 				yield from $this->getVariableDimensions($item->value->items, $newStack);
 
 			} else {
-				throw new \Exception('invalid implementation'); // TODO
+				yield [$item->value, $newStack];
 			}
 		}
 

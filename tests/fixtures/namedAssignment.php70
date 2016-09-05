@@ -1,7 +1,7 @@
 <?php
 
 ${'~transpiler-1'} = ['A' => 1, 'B' => 2, 'C' => 3];
-$a = ${'~transpiler-1'}['A'];
+$a->c = ${'~transpiler-1'}['A'];
 $c = ${'~transpiler-1'}['C'];
 
 ${'~transpiler-2'} = [['A' => 10], ['B' => 20]];
