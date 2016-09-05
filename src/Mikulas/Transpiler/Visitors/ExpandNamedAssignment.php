@@ -26,8 +26,6 @@ class ExpandNamedAssignment extends NodeVisitorAbstract
 			return NULL; // node stays as-is, simple assignment
 		}
 
-		ini_set('xdebug.var_display_max_depth', '6');
-
 		// ['a' => $a, 'c' => $c] = ['a' => 1, 'b' => 2, 'c' => 3];
 		// $leftSide              = $node->expression
 		// # -->
