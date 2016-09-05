@@ -21,12 +21,12 @@ class ReadmeTest extends \PHPUnit_Framework_TestCase
 		$parser = (new ParserFactory)->create(ParserFactory::ONLY_PHP7);
 
 		$prefix = "<?php\n";
-		$expected = "$prefix$expected";
 		$input = "$prefix$input";
 
 		$parser->parse($input);
 
 		if ($expected !== '') {
+			$expected = "$prefix$expected";
 			Helper::assertTranspiledAs($expected, $input);
 		}
 	}
