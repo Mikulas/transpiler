@@ -24,11 +24,12 @@ class Transpiler
 
 	public function __construct()
 	{
-		// TODO factory?
+		$variableFactory = new VariableFactory();
+
 		$this->traverser = new NodeTraverser(TRUE);
 		$this->traverser->addVisitor(new RemoveClassConstantVisibility());
 		$this->traverser->addVisitor(new RemoveVoidReturnType());
-		$this->traverser->addVisitor(new ExpandNamedAssignment());
+		$this->traverser->addVisitor(new ExpandNamedAssignment($variableFactory));
 		$this->traverser->addVisitor(new RemoveNullableReturnValues());
 		$this->traverser->addVisitor(new RewriteNullableParameterType());
 		$this->traverser->addVisitor(new RemoveIterableReturnType());

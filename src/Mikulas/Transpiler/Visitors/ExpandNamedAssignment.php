@@ -2,6 +2,7 @@
 
 namespace Mikulas\Transpiler\Modifiers;
 
+use Mikulas\Transpiler\VariableFactory;
 use PhpParser\Node;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\NodeVisitorAbstract;
@@ -10,8 +11,14 @@ use PhpParser\NodeVisitorAbstract;
 class ExpandNamedAssignment extends NodeVisitorAbstract
 {
 
-	/** @var int */
-	private $newVariableId = 1;
+	/** @var VariableFactory */
+	private $variableFactory;
+
+
+	public function __construct(VariableFactory $variableFactory)
+	{
+		$this->variableFactory = $variableFactory;
+	}
 
 
 	/**
@@ -37,10 +44,7 @@ class ExpandNamedAssignment extends NodeVisitorAbstract
 		$leftSide = $node->var;
 
 		// ${'~transpiler-1'} = ['a' => 1, 'b' => 2, 'c' => 3];
-		$rollout = new Node\Expr\Variable(
-			new String_("~transpiler-{$this->newVariableId}")
-		);
-		$this->newVariableId += 1;
+		$rollout = $this->variableFactory->create();
 		$node->var = $rollout;
 		$nodes[] = $node;
 
