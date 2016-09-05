@@ -11,12 +11,13 @@ class Php71FeatureTest extends \PHPUnit_Framework_TestCase
 	public function getFeatureList(): array
 	{
 		return [
-//			['voidReturnType'],
-//			['classConstantVisibility'],
-//			['namedAssignment'],
-//			['nullableTypes'],
-//			['iterable'],
+			['voidReturnType'],
+			['classConstantVisibility'],
+			['namedAssignment'],
+			['nullableTypes'],
+			['iterable'],
 			['closureFromCallable'],
+			['multiCatchExceptionHandling']
 		];
 	}
 

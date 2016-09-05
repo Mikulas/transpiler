@@ -70,7 +70,6 @@ $b = ${'~transpiler-1'}['X']['B'];
 ${'~transpiler-2'} = ['T' => ['U' => 15, 'V' => 19]];
 $u = ${'~transpiler-2'}['T']['U'];
 $v = ${'~transpiler-2'}['T']['V'];
-
 ```
 
 __Limitations:__ slightly worse performance, introduces new variable
@@ -148,4 +147,23 @@ function () {
 function () use(&$foo, &$a, &$b) {
     return call_user_func_array($foo($a = $b), func_get_args());
 };
+```
+
+
+=== Expand multi catch exception handlers
+
+```
+try {
+} catch (FooException | BarException $e) {
+    handler();
+}
+
+# -->
+
+try {
+} catch (FooException $e) {
+    handler();
+} catch (BarException $e) {
+    handler();
+}
 ```

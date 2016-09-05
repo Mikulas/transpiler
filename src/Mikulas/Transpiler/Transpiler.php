@@ -2,6 +2,7 @@
 
 namespace Mikulas\Transpiler;
 
+use Mikulas\Transpiler\Modifiers\ExpandMultiCatchHandler;
 use Mikulas\Transpiler\Modifiers\RemoveClassConstantVisibility;
 use Mikulas\Transpiler\Modifiers\RemoveIterableParameterType;
 use Mikulas\Transpiler\Modifiers\RemoveIterableReturnType;
@@ -33,6 +34,7 @@ class Transpiler
 		$this->traverser->addVisitor(new RemoveIterableReturnType());
 		$this->traverser->addVisitor(new RemoveIterableParameterType());
 		$this->traverser->addVisitor(new RewriteClosureFromCallable());
+		$this->traverser->addVisitor(new ExpandMultiCatchHandler());
 	}
 
 

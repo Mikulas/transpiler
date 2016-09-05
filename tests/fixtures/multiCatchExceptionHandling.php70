@@ -1,0 +1,10 @@
+<?php
+
+try {
+} catch (FirstException $e) {
+    handler();
+} catch (SecondException $e) {
+    handler();
+} catch (Exception $e) {
+    handler2();
+}

@@ -1,0 +1,8 @@
+<?php
+
+try {
+} catch (FirstException | SecondException $e) {
+	handler();
+} catch (Exception $e) {
+	handler2();
+}
