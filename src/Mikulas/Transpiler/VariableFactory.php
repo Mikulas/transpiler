@@ -18,7 +18,7 @@ class VariableFactory
 	{
 		$this->index += 1;
 		return new Node\Expr\Variable(
-			new Node\Scalar\String_("~transpiler@{$this->index}")
+			new Node\Scalar\String_("~transpiler-{$this->index}")
 		);
 	}
 
