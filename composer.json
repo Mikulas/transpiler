@@ -1,0 +1,29 @@
+{
+    "name": "mikulas/transpiler-build",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.0",
+        "mikulas/transpiler": "@dev",
+        "symfony/finder": "~2.8"
+    },
+    "require-dev": {
+        "clue/phar-composer": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {"Mikulas\\TranspilerBuild\\": "src/"}
+    },
+    "authors": [
+        {
+            "name": "Mikulas Dite",
+            "email": "mikulas@dite.pro"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:Mikulas/transpiler.git"
+        }
+    ]
+}

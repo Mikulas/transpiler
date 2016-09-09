@@ -1,0 +1,18 @@
+:toc: macro
+:!toc-title:
+:source-language: php
+
+++++
+<a href="#transpiler"><img height="150" src="https://mikulas.github.io/assets/transpiler.svg" align="right" /></a>
+++++
+= Transpiler
+
+PHP source code transformations.
+
+image:https://circleci.com/gh/Mikulas/transpiler.svg?style=svg&circle-token=95af859daa8a8d404100caf22e52269e447012f3["CircleCI", link="https://circleci.com/gh/Mikulas/transpiler"]
+
+toc::[]
+
+== Where did everything go‽
+
+This orphaned branch is for phar-build only. See master instead.
