@@ -202,7 +202,8 @@ function compute($arr)
 Closure::fromCallable('intdiv');
 Closure::fromCallable([$foo, 'bar']);
 Closure::fromCallable([Foo::class, 'qaz']);
-Closure::fromCallable($foo($a = $b));
+use Closure as Alias;
+Alias::fromCallable($foo($a = $b));
 
 # -->
 
@@ -218,12 +219,13 @@ function () {
     return call_user_func_array([\Foo::class, 'qaz'], func_get_args());
 };
 
+use Closure as Alias;
 function () use(&$foo, &$a, &$b) {
     return call_user_func_array($foo($a = $b), func_get_args());
 };
 ```
 
-__Limitations:__ FQN is not resolved, so aliases to Closure do not work. Dynamic invocation does not work either (such as from `call_user_func`).
+__Limitations:__ Dynamic invocation does not work (such as from `call_user_func`).
 
 
 === Expand multi catch exception handlers
