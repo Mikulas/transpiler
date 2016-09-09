@@ -16,11 +16,11 @@ list('X' => list('A' => $a), 'Y' => list('B' => $b)) = ['X' => ['A' => 10], 'Y' 
 [, $second] = [0, 1];
 
 while (list($a, $b) = $right) {
-	block();
+    block();
 }
 
 foreach ($left as list($a, $b)) {
-	block();
+    block();
 }
 
 list($a) = $simple;

@@ -5,6 +5,7 @@ namespace Mikulas\Transpiler;
 use Mikulas\Transpiler\Visitors;
 use PhpParser\Node;
 use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor as PhpParserVisitors;
 
 
 class Transpiler
@@ -21,6 +22,8 @@ class Transpiler
 		$variableFactory = new VariableFactory();
 
 		$this->traverser = new NodeTraverser(TRUE);
+		$this->traverser->addVisitor(new PhpParserVisitors\NameResolver());
+
 		$this->traverser->addVisitor(new Visitors\RemoveClassConstantVisibility());
 		$this->traverser->addVisitor(new Visitors\RemoveVoidReturnType());
 		$this->traverser->addVisitor(new Visitors\ExpandNamedAssignment($variableFactory));

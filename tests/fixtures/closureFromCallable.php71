@@ -8,4 +8,7 @@ Closure::fromCallable([Foo::class, 'qaz']);
 
 Closure::fromCallable($foo($a = $b));
 
+use Closure as ClosureAlias;
+ClosureAlias::fromCallable('foo');
+
 call_user_func(['Closure', 'fromCallable']);
