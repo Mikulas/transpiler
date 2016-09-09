@@ -3,7 +3,7 @@
 :source-language: php
 
 ++++
-<img height="150" src="https://mikulas.github.io/assets/transpiler.svg" align="right" />
+<a href="#transpiler"><img height="150" src="https://mikulas.github.io/assets/transpiler.svg" align="right" /></a>
 ++++
 = Transpiler
 
