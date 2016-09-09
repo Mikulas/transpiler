@@ -23,6 +23,9 @@ bash <(curl -sSL 'https://raw.githubusercontent.com/Mikulas/transpiler/v1.1.1/in
 
 === Prebuilt package: manual
 
+Download release binary from https://github.com/Mikulas/transpiler/releases/latest,
+put it anywhere in your `$PATH` and make it executable.
+
 ----
 TARGET="/usr/local/bin/php-transpiler"
 curl -L 'https://github.com/Mikulas/transpiler/releases/download/v1.1.1/transpiler.phar' -o "$TARGET"

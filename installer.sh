@@ -2,7 +2,7 @@
 set -euvo pipefail
 IFS=$'\n\t'
 
-VERSION="v1.0.0"
+VERSION="v1.1.1"
 
 TARGET_DIR="/usr/local/bin"
 TARGET="$TARGET_DIR/php-transpiler"
