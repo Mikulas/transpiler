@@ -13,6 +13,39 @@ image:https://circleci.com/gh/Mikulas/transpiler.svg?style=svg&circle-token=95af
 
 toc::[]
 
+== Installation
+
+=== Prebuilt package: simple
+
+```
+bash <(curl -sSL 'https://raw.githubusercontent.com/Mikulas/transpiler/v1.0.0/installer.sh')
+```
+
+=== Prebuilt package: manual
+
+```
+TARGET="/usr/local/bin/php-transpiler"
+curl -L 'https://github.com/Mikulas/transpiler/releases/download/v1.0.0/transpiler.phar' -o "$TARGET"
+chmod a+x "$TARGET"
+export PATH="$PATH:/usr/local/bin"
+```
+
+=== Dev version
+
+```
+git clone git@github.com:Mikulas/transpiler.git
+cd transpiler
+git checkout v1.0.0
+composer install
+```
+
+
+== Usage
+
+```
+php-transpile <paths> (<paths>)... [--verbose]
+```
+
 == What Is It Good For?
 
 By transpiling code to older runtime versions you gain
