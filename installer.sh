@@ -4,8 +4,9 @@ IFS=$'\n\t'
 
 VERSION="v1.1.2"
 
+TARGET_NAME="php-transpiler"
 TARGET_DIR="/usr/local/bin"
-TARGET="$TARGET_DIR/php-transpiler"
+TARGET="$TARGET_DIR/$TARGET_NAME"
 
 mkdir -p "$TARGET_DIR"
 
@@ -14,3 +15,5 @@ chmod a+x "$TARGET"
 
 export PATH="$PATH:$TARGET_DIR"
 echo 'PATH="$PATH:'"$TARGET_DIR"'"' >> ~/.bashrc
+
+"$TARGET_NAME" --version
