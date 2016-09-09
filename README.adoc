@@ -64,7 +64,7 @@ composer require mikulas/transpiler
 php-transpile <paths> (<paths>)... [--verbose]
 ----
 
-This command will convert all `*.php` and `*.phpt` files found recursively in `paths`.
+This command will convert all `.php` and `.phpt` files found recursively in `paths`.
 Make sure you run this command only when you have no changes in your worktree, otherwise
 you will lose those changes! Files are transpiled in-place.
 
