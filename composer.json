@@ -11,9 +11,7 @@
     "require-dev": {
         "clue/phar-composer": "^1.0"
     },
-    "autoload": {
-        "psr-4": {"Mikulas\\TranspilerBuild\\": "src/"}
-    },
+    "bin": ["bin/transpile"],
     "authors": [
         {
             "name": "Mikulas Dite",
