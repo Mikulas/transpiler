@@ -7,13 +7,15 @@
 ++++
 = Transpiler
 
-PHP source code transformations.
+PHP source code transformations operating on abstract syntax tree (AST). This library contains multiple
+ visitors that convert AST of PHP7.1 to PHP7.0-compatible one. Alongside this each release comes with a
+ binary with console utility that transpiles whole worktree in-place.
 
 image:https://circleci.com/gh/Mikulas/transpiler.svg?style=svg&circle-token=95af859daa8a8d404100caf22e52269e447012f3["CircleCI", link="https://circleci.com/gh/Mikulas/transpiler"]
 
 toc::[]
 
-== Installation
+== Console utility installation
 
 === Prebuilt package: simple
 
@@ -42,6 +44,14 @@ git checkout v1.1.1
 composer install
 ----
 
+== Library installation
+
+This library by itself only contains AST modifiers, to convert your codebase, you probably want
+the console utility instead. If you really need to build on this, add `mikulas/transpiler` as dependency:
+
+----
+composer require mikulas/transpiler
+----
 
 == Usage
 
@@ -49,6 +59,9 @@ composer install
 php-transpile <paths> (<paths>)... [--verbose]
 ----
 
+This command will convert all `*.php` and `*.phpt` files found recursively in `paths`.
+Make sure you run this command only when you have no changes in your worktree, otherwise
+you will lose those changes! Files are transpiled in-place.
 
 == What Is It Good For?
 
