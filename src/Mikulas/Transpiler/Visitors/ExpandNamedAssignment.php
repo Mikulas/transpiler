@@ -40,7 +40,10 @@ class ExpandNamedAssignment extends NodeVisitorAbstract
 			$assignment = new Node\Expr\Assign($list, $tempVar);
 			array_unshift($node->stmts, $assignment);
 
-		} elseif ($node instanceof Node\Stmt\Foreach_) {
+		} elseif (
+			$node instanceof Node\Stmt\Foreach_ &&
+			$node->valueVar instanceof Node\Expr\List_
+		) {
 			$list = $node->valueVar;
 			$tempVar = $this->variableFactory->create();
 			$node->valueVar = $tempVar;

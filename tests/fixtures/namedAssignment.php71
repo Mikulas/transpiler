@@ -15,12 +15,25 @@ list('X' => list('A' => $a), 'Y' => list('B' => $b)) = ['X' => ['A' => 10], 'Y' 
 
 [, $second] = [0, 1];
 
+// list should be expanded
 while (list($a, $b) = $right) {
     block();
 }
 
+// simple variable on left side should not be expanded
+while ($left = $right) {
+    block();
+}
+
+// list should be expanded
 foreach ($left as list($a, $b)) {
     block();
 }
 
+// simple variable on right side should not be expanded
+foreach ($left as $right) {
+    block();
+}
+
+// simple right side should not be expanded
 list($a) = $simple;

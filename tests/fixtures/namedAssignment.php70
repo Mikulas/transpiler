@@ -28,16 +28,29 @@ $b = ${'~transpiler-6'}['Y']['B'];
 ${'~transpiler-7'} = [0, 1];
 $second = ${'~transpiler-7'}[1];
 
+// list should be expanded
 while (${'~transpiler-8'} = $right) {
     $a = ${'~transpiler-8'}[0];
     $b = ${'~transpiler-8'}[1];
     block();
 }
 
+// simple variable on left side should not be expanded
+while ($left = $right) {
+    block();
+}
+
+// list should be expanded
 foreach ($left as ${'~transpiler-9'}) {
     $a = ${'~transpiler-9'}[0];
     $b = ${'~transpiler-9'}[1];
     block();
 }
 
+// simple variable on right side should not be expanded
+foreach ($left as $right) {
+    block();
+}
+
+// simple right side should not be expanded
 $a = $simple[0];
