@@ -1,10 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace Mikulas\Transpiler\Modifiers;
+namespace Mikulas\Transpiler\Visitors;
 
 use PhpParser\Node;
 use PhpParser\NodeTraverser;
-use PhpParser\NodeVisitor;
 use PhpParser\NodeVisitorAbstract;
 
 
