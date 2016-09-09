@@ -89,7 +89,8 @@ class ExpandNamedAssignment extends NodeVisitorAbstract
 		foreach ($this->getVariableDimensions($leftSide->items) as list($variable, $dimensions)) {
 			/** @var Node\Expr\Variable $var */
 			$nodes[] = new Node\Expr\Assign($variable,
-				$this->nestedDimFetch($rollout, $dimensions)
+				$this->nestedDimFetch($rollout, $dimensions),
+				['comments' => $node->getAttribute('comments', [])]
 			);
 		}
 
