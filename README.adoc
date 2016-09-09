@@ -19,6 +19,7 @@ toc::[]
 
 === Prebuilt package: simple
 
+[source,bash]
 ----
 bash <(curl -sSL 'https://raw.githubusercontent.com/Mikulas/transpiler/v1.1.1/installer.sh')
 ----
@@ -28,6 +29,7 @@ bash <(curl -sSL 'https://raw.githubusercontent.com/Mikulas/transpiler/v1.1.1/in
 Download release binary from https://github.com/Mikulas/transpiler/releases/latest,
 put it anywhere in your `$PATH` and make it executable.
 
+[source,bash]
 ----
 TARGET="/usr/local/bin/php-transpiler"
 curl -L 'https://github.com/Mikulas/transpiler/releases/download/v1.1.1/transpiler.phar' -o "$TARGET"
@@ -37,6 +39,7 @@ export PATH="$PATH:/usr/local/bin"
 
 === Dev version
 
+[source,bash]
 ----
 git clone git@github.com:Mikulas/transpiler.git
 cd transpiler
@@ -49,12 +52,14 @@ composer install
 This library by itself only contains AST modifiers, to convert your codebase, you probably want
 the console utility instead. If you really need to build on this, add `mikulas/transpiler` as dependency:
 
+[source,bash]
 ----
 composer require mikulas/transpiler
 ----
 
 == Usage
 
+[source,bash]
 ----
 php-transpile <paths> (<paths>)... [--verbose]
 ----
