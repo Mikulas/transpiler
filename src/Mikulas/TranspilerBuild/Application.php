@@ -2,6 +2,7 @@
 
 namespace Mikulas\TranspilerBuild;
 
+use Mikulas\Transpiler\Transpiler;
 use Symfony\Component\Console;
 use Symfony\Component\Console\Input\InputInterface;
 
@@ -11,6 +12,18 @@ use Symfony\Component\Console\Input\InputInterface;
  */
 class Application extends Console\Application
 {
+
+	public function getVersion()
+	{
+		return Transpiler::VERSION;
+	}
+
+
+	public function getName()
+	{
+		return 'Transpiler';
+	}
+
 
 	protected function getCommandName(InputInterface $input)
 	{
